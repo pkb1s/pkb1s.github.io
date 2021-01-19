@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Home"
+    url: https://pkb1s.github.io/
   - title: "whoami"
     url: https://pkb1s.github.io/whoami/
   # - title: "About"
