@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Another Test Post
 tags: [active-directory]
 ---

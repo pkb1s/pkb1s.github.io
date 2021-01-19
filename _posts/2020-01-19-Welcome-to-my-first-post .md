@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Welcome to My First Post
 tags: [active-directory]
 ---
