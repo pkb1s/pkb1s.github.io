@@ -94,7 +94,7 @@ analytics:
 # Site Author
 author:
   name             : "pkb1s"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/icon.png"
   bio              : "Red Teamer and Active Directory Enthusiast"
   #location         : "Somewhere"
   #email            :

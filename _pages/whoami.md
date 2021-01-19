@@ -1,6 +1,7 @@
 ---
 layout: page
 title: whoami
+permalink: /whoami/
 ---
 
 My name is Petros Koutroumpis and I am a Red Teamer. I enjoy breaking into secure environments and my main area of interest is Active Directory and Windows post-exploitation.
