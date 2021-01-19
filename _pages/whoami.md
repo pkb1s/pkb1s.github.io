@@ -4,7 +4,7 @@ title: whoami
 permalink: /whoami/
 ---
 
-My name is Petros Koutroumpis and I am a Red Teamer. I enjoy breaking into secure environments and my main area of interest is Active Directory and Windows post-exploitation.
+My name is Petros Koutroumpis and I enjoy breaking into secure environments. My main areas of interest are Active Directory and Windows post-exploitation.
 
 Feel free to reach out to me on [Twitter](https://twitter.com/pkb1s).
 
