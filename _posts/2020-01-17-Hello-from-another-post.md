@@ -2,6 +2,7 @@
 layout: single
 title: Hello From Another Post
 tags: [active-directory]
+classes: wide
 ---
 
 # Longa numen

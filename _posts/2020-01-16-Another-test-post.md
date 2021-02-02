@@ -2,6 +2,7 @@
 layout: single
 title: Another Test Post
 tags: [active-directory]
+classes: wide
 ---
 
 # Nisi peti ubi
