@@ -112,7 +112,7 @@ Using WinDivertSharp, I was able to write a tool called SharpRelay to communicat
 
 The code of this tool can be found here:
 
-<GITHUB LINK OF THE SHARPRELAY CODE>
+TBD.
 
 Also, a big part of the code I used for the packet interception was taken from this project by TechnikEmpire:
 
@@ -130,8 +130,6 @@ As mentioned earlier we have the following scenario:
 
 The following video demonstrates how we can use the SpoolSample tool to compromise a computer object via an SMB relay attack:
 
-<video src="/assets/images/2020-02-01-Relay-attacks-via-cobalt-strike-beacons/SharpRelay_SpoolSample-PoC.mov"></video>
-
  
 
 #### Abusing weak ACLs on a User Object
@@ -142,4 +140,3 @@ As shown earlier, the scenario we are going to abuse it the following:
 
 Having a local administrator beacon running as Alice, we will modify Bob's `homeDirectory` attribute and point it to the workstation where we have our beacon running (10.1.1.20). Next time Bob logs in to his workstation he will try to authenticate against the compromised host and we will perform our SMB relay attack:
 
-<video src="/assets/images/2020-02-01-Relay-attacks-via-cobalt-strike-beacons/SharpRelay_homeDirectory-Abuse-PoC.mov"></video>
