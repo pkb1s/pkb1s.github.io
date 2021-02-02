@@ -90,6 +90,7 @@ body {
 
 	h1, h2, h3, h4, h5, h6 {
 		.header-link {
+      color: $heading-color;
 			position: relative;
 			left: 0.5em;
 			opacity: 0;
@@ -206,7 +207,6 @@ body {
 
     .page__title {
       font-size: $type-size-2;
-      color: $heading-color;
       @include breakpoint($small) {
         font-size: $type-size-1;
       }
