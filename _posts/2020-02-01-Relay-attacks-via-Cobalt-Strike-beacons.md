@@ -22,40 +22,40 @@ The scenario where this is useful is the following:
 
 ![SharpRelay_BH-Path-Computer](/assets/images/2020-02-01-Relay-attacks-via-cobalt-strike-beacons/SharpRelay_BH-Path-Computer.png)
 
-Ok, lets put this attack aside for now and we will come back to it later.
+OK, lets put this attack aside for now and we will come back to it later.
 
-Another scenario that I find very often when reviewing AD environments is when a user object has rights such as GenericAll or GenericWrite on another user object similar to the following:
+Another scenario that we find very often when reviewing AD environments is when a user object has rights such as `GenericAll` or `GenericWrite` on another user object similar to the following:
 
 ![SharpRelay_BH-User-GenericAll](/assets/images/2020-02-01-Relay-attacks-via-cobalt-strike-beacons/SharpRelay_BH-User-GenericAll.png)
 
-If you have compromised Alice then you can do the following:
+If we have compromised Alice then we can do the following:
 
 * Use a targeted Kerberoasting attack against Bob by setting an SPN and requesting a TGS
 * Force a password change for Bob
 
 However, both of these attacks have limitations. For targeted kerberoasting the user must be configured with a weak password in order to crack it. As for changing Bob's password it might be something that you don't want to do during a red team operation to avoid disruption or raising suspicion.
 
-So I started looking at the different attributes a user has and another option is to modify one of the following attributes of the Bob user:
+So I started looking at the different attributes a user has and another option is to modify one of the following use attributes:
 
 * homeDirectory - Specifies the home directory of the account and it can be a UNC path.
 * profilePath - Specifies a path to the user's profile and it can also be a UNC path.
 
-By modifying any of these attributes, you can point them to a UNC path of a computer under your control and perform an SMB relay attack.
+By modifying any of these attributes, we can point them to a UNC path of a computer under your control and perform an SMB relay attack.
 
-If you are a red teamer, something you might be wondering so far is this - You have been telling me these ways of exploiting AD objects based on ACL misconfigurations and SMB relay attacks but you haven't told me how to perform a relay attack if all I have is a Cobalt Strike beacon.
+Something you might be wondering so far is this - You have been telling me these ways of exploiting AD objects based on ACL misconfigurations and SMB relay attacks but you haven't told me how to perform a relay attack if all I have is a Cobalt Strike beacon.
 
 Keep reading and your question will be answered ;)
 
 ### Relay Attacks
 
-So far I have mentioned relay attacks, and specifically SMB relay. This kind of attack has been known for many years. If you want to learn more about SMB relay you can read the following posts:
+So far I have mentioned relay attacks, and specifically SMB relays. This kind of attack has been known for many years. If you want to learn more about SMB relay you can read the following posts:
 
 * [https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html]()
 * [https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/]()
 
-The rest of this post is based on the reader's understanding of relay attacks and how they work so make sure you have read the above posts.
+The rest of this post is based on the reader's basic understanding of relay attacks so make sure you have read the above posts.
 
-### Ok, I understand SMB relay attacks. Now what?
+### OK, I understand how SMB relay attacks work. Now what?
 
 When I performed relay attacks in the past I was always doing an internal pentest and I had physical access to the target network. But, why not use these powerful attacks while on a red team operation and you have to do everything through a Cobalt Strike beacon?
 
@@ -69,8 +69,6 @@ DivertTCPconn is based on hwfwbypass and both are written in C++. It is using th
 
 According to it's description, WinDivert is a kernel driver that allows for user-mode packet interception and modification. The user needs to specify a filter and any packets that match this filter will be intercepted and can be modified. 
 
-From the ReadMe file:
-
 ```
 The WinDivert.sys driver is installed below the Windows network stack.  The
 following actions occur:
@@ -83,21 +81,21 @@ following actions occur:
     re-inject the (modified) using a call to WinDivertSend().
 ```
 
-The most important thing that WinDivert allows us to do is that we can intercept traffic going to an open Windows port and redirect it to another port by modifying the TCP source and destination ports of each packet, recalculating the TCP checksums and reinjecting the packets into the network stack.
+The most important thing that WinDivert allows us to do is to intercept traffic going to an open Windows port and redirect it to another port by modifying the TCP source and destination ports of each packet, recalculating the TCP checksums and reinjecting the packets into the network stack.
 
-#### Why does this help us?
+#### How does this help us?
 
 On Windows, port 445 is always running by default. I won't go into detail about the process using port 445 because this is already analysed in the following post, so please go ahead and read it:
 
 * [https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/]()
 
-As you read in the above post, it also contains another interesting idea. Using WinDivert to perform an SMB relay attack via Metasploit. You can upload a few DLLs and a driver file to the target host along with the divertTCPconn.exe and execute them. I found this attack to be awesome, but what I didnt like was that you had to upload multiple DLLs on the target host. 
+As mentioned in the above post, it also contains another interesting idea. Using WinDivert to perform an SMB relay attack via Metasploit. You can upload a few DLLs and a driver file to the target host along with the divertTCPconn.exe and execute them. I found this attack to be awesome, but what I didn't like was that you had to upload multiple DLLs on the target host. 
 
 So my goal was to do the same attack by dropping the minimum amount of files on disk and also executing the attack through Cobalt Strike.
 
 ### SMB Relay through Cobalt Strike
 
-First of all, I wanted to make use of Cobalt Strike's execute-assembly function so I decided to write my code using the .NET framework. My initial thought would be to re-write divertTCPconn in C# and then everything would work. It turns out that this was very complicated. Fortunately, I found the following NuGet package by TechnikEmpire:
+First of all, I wanted to make use of Cobalt Strike's `execute-assembly` function so I decided to write my code using the .NET framework. My initial thought would be to re-write divertTCPconn in C# and then everything would work. It turns out that this was very complicated. Fortunately, I found the following NuGet package by TechnikEmpire:
 
 * [https://github.com/TechnikEmpire/WinDivertSharp]()
 
@@ -110,7 +108,7 @@ Using WinDivertSharp, I was able to write a tool called SharpRelay to communicat
 * Run Impacket's ntlmrelayx with proxychains to do the SMB relay
 * When a victim tries to access port 445 of the compromised host the NTLM authentication will be forwarded to our teamserver and relayed to another machine
 
-The code of this tool can be found here:
+The code of SharpRelay can be found here:
 
 TBD.
 
