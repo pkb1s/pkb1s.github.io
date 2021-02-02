@@ -130,8 +130,7 @@ As mentioned earlier we have the following scenario:
 
 The following video demonstrates how we can use the SpoolSample tool to compromise a computer object via an SMB relay attack:
 
- {% include video id="XsxDH4HcOWA" provider="youtube" %}
-
+ {% include video id="alyRKYtRxYQ" provider="youtube" %}
 
 #### Abusing weak ACLs on a User Object
 
@@ -141,4 +140,4 @@ As shown earlier, the scenario we are going to abuse it the following:
 
 Having a local administrator beacon running as Alice, we will modify Bob's `homeDirectory` attribute and point it to the workstation where we have our beacon running (10.1.1.20). Next time Bob logs in to his workstation he will try to authenticate against the compromised host and we will perform our SMB relay attack:
 
-{% include video id="XsxDH4HcOWA" provider="youtube" %}
+{% include video id="pcoll94ggB0" provider="youtube" %}
