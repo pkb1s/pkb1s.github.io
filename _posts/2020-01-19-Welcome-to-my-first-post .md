@@ -3,6 +3,9 @@ layout: single
 title: Welcome to My First Post
 tags: [active-directory]
 classes: wide
+image:
+  feature: /images/Welcome-to-my-first-post/icon.png
+  thumb: /images/Welcome-to-my-first-post/icon.png
 ---
 
 # Et dolet colla sacra cruentum Gorgone facinusque
