@@ -542,6 +542,7 @@ body {
   .page {
     @include breakpoint($large) {
       padding-right: 0;
+      padding-left: 2em;
     }
 
     @include breakpoint($x-large) {
