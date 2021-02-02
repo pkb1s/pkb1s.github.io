@@ -2,6 +2,7 @@
 layout: single
 title: presentations
 permalink: /presentations/
+classes: wide
 ---
 
 DEFCON 27 - Red Team Village - [(Ab)using GPOs for Active Directory Pwnage](https://www.slideshare.net/PetrosKoutroumpis/abusing-gpos-for-active-directory-pwnage)
