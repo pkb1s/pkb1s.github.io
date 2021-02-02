@@ -1,7 +1,8 @@
 ---
-layout: splash
+layout: single
 title: Welcome to My First Post
 tags: [active-directory]
+classes: wide
 ---
 
 # Et dolet colla sacra cruentum Gorgone facinusque
