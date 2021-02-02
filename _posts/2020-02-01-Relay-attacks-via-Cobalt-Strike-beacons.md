@@ -11,8 +11,8 @@ classes: wide
 
 Back in 2018, [Will Shroeder](https://twitter.com/harmj0y), [Lee Christensen](https://twitter.com/tifkin_) and [Matt Nelson](https://twitter.com/enigma0x3) shared their awesome [research](https://www.slideshare.net/harmj0y/derbycon-the-unintended-risks-of-trusting-active-directory) around Active Directory trusts at DerbyCon. During the last part of their presentation they showed how we can abuse the Print Spooler service in order to force a computer to authenticate against another computer. Lee also released a tool that allows us to do this easily called [SpoolSample](https://github.com/leechristensen/SpoolSample). If you are not familiar with this attack I highly recommend reading the following blog posts:
 
-* https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1
-* https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/
+* [https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1]()
+* [https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/]()
 
 Most of the abuses I have seen so far are using the SpoolSample tool along with compromising a server with Unconstrained Delegation enabled. This allows the attacker to force a computer authenticate back to the attacker using Kerberos and since Unconstrained Delegetation is enabled on the compromised server, the victim also sends their TGT within the TGS. However, there is another way to compromise computers. 
 
@@ -99,7 +99,7 @@ So my goal was to do the same attack by dropping the minimum amount of files on 
 
 First of all, I wanted to make use of Cobalt Strike's execute-assembly function so I decided to write my code using the .NET framework. My initial thought would be to re-write divertTCPconn in C# and then everything would work. It turns out that this was very complicated. Fortunately, I found the following NuGet package by TechnikEmpire:
 
-* https://github.com/TechnikEmpire/WinDivertSharp
+* [https://github.com/TechnikEmpire/WinDivertSharp]()
 
 Using WinDivertSharp, I was able to write a tool called SharpRelay to communicate with the WinDivert driver and perform any packet modification I wanted. The only requirement for this attack to work is to have a beacon with local administrator privileges or with the ability to load drivers. The attack using SharpRelay works as follows:
 
