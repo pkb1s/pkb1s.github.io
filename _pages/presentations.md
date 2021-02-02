@@ -3,6 +3,7 @@ layout: single
 title: Presentations
 permalink: /presentations/
 classes: wide
+author_profile: true
 ---
 
 
