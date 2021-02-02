@@ -50,8 +50,8 @@ Keep reading and your question will be answered ;)
 
 So far I have mentioned relay attacks, and specifically SMB relay. This kind of attack has been known for many years. If you want to learn more about SMB relay you can read the following posts:
 
-* https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html
-* https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/
+* [https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html]()
+* [https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/]()
 
 The rest of this post is based on the reader's understanding of relay attacks and how they work so make sure you have read the above posts.
 
@@ -63,7 +63,7 @@ It looks like there is a way to do this! Actually this is possible for a few yea
 
 DivertTCPconn is based on hwfwbypass and both are written in C++. It is using the amazingly complicated WinDivert project written by Basil:
 
-* https://github.com/basil00/Divert
+* [https://github.com/basil00/Divert]()
 
 #### How does it work?
 
@@ -89,7 +89,7 @@ The most important thing that WinDivert allows us to do is that we can intercept
 
 On Windows, port 445 is always running by default. I won't go into detail about the process using port 445 because this is already analysed in the following post, so please go ahead and read it:
 
-* https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/
+* [https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/]()
 
 As you read in the above post, it also contains another interesting idea. Using WinDivert to perform an SMB relay attack via Metasploit. You can upload a few DLLs and a driver file to the target host along with the divertTCPconn.exe and execute them. I found this attack to be awesome, but what I didnt like was that you had to upload multiple DLLs on the target host. 
 
@@ -116,7 +116,7 @@ TBD.
 
 Also, a big part of the code I used for the packet interception was taken from this project by TechnikEmpire:
 
-* https://github.com/TechnikEmpire/CitadelCore
+* [https://github.com/TechnikEmpire/CitadelCore]()
 
 ### Show me a video or it didn't happen
 
