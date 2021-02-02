@@ -3,6 +3,8 @@ layout: single
 title: Hello From Another Post
 tags: [active-directory]
 classes: wide
+header:
+  teaser: /images/Welcome-to-my-first-post/icon.png
 ---
 
 # Longa numen

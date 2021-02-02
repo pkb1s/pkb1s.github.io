@@ -3,6 +3,8 @@ layout: single
 title: Another Test Post
 tags: [active-directory]
 classes: wide
+header:
+  teaser: /images/Welcome-to-my-first-post/icon.png
 ---
 
 # Nisi peti ubi
