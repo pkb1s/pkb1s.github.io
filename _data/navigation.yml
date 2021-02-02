@@ -2,6 +2,8 @@
 main:
   - title: "Home"
     url: https://pkb1s.github.io/
+  - title: "Presentations"
+    url: https://pkb1s.github.io/presentations/
   - title: "whoami"
     url: https://pkb1s.github.io/whoami/
   # - title: "About"
