@@ -5,6 +5,11 @@
 /*
    Default
    ========================================================================== */
+   @media (max-width: 767px) {                  
+    .sidebar {
+       display: none;
+      }
+  }
 
 .sidebar {
   @include clearfix();
