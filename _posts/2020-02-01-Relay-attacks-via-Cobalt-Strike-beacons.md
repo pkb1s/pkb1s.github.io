@@ -97,7 +97,7 @@ First of all, I wanted to make use of Cobalt Strike's `execute-assembly` functio
 
 * [https://github.com/TechnikEmpire/WinDivertSharp]()
 
-Using WinDivertSharp, I was able to write a tool called SharpRelay to communicate with the WinDivert driver and perform any packet modification I wanted. The only requirement for this attack to work is to have a beacon with local administrator privileges or with the ability to load drivers. The attack using SharpRelay works as follows:
+Using WinDivertSharp, I was able to write a tool called [SharpRelay](https://github.com/pkb1s/SharpRelay) to communicate with the WinDivert driver and perform any packet modification I wanted. The only requirement for this attack to work is to have a beacon with local administrator privileges or with the ability to load drivers. The attack using SharpRelay works as follows:
 
 * Upload the _**signed**_ WinDivert driver into any folder on the compromised host
 * Run SharpRelay to modify the destination port of the incoming packets on port 445 and redirect them to another port (e.g. 8445)
@@ -107,11 +107,9 @@ Using WinDivertSharp, I was able to write a tool called SharpRelay to communicat
 * When a victim tries to access port 445 of the compromised host the NTLM authentication will be forwarded to our teamserver and relayed to another machine
 
 The code of SharpRelay can be found here:
-
-TBD.
+* [https://github.com/pkb1s/SharpRelay]()
 
 Also, a big part of the code I used for the packet interception was taken from this project by TechnikEmpire:
-
 * [https://github.com/TechnikEmpire/CitadelCore]()
 
 ### Show me a video or it didn't happen
