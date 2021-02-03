@@ -9,8 +9,8 @@ classes: wide
 
 Back in 2018, [Will Shroeder](https://twitter.com/harmj0y), [Lee Christensen](https://twitter.com/tifkin_) and [Matt Nelson](https://twitter.com/enigma0x3) shared their awesome [research](https://www.slideshare.net/harmj0y/derbycon-the-unintended-risks-of-trusting-active-directory) around Active Directory trusts at DerbyCon. During the last part of their presentation they showed how we can abuse the Print Spooler service in order to force a computer to authenticate against another computer. Lee also released a tool that allows us to do this easily called [SpoolSample](https://github.com/leechristensen/SpoolSample). If you are not familiar with this attack I highly recommend reading the following blog posts:
 
-* [https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1]()
-* [https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/]()
+* [https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1](https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1)
+* [https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/](https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/)
 
 Most of the abuses I have seen so far are using the SpoolSample tool along with compromising a server with Unconstrained Delegation enabled. This allows the attacker to force a computer authenticate back to the attacker using Kerberos and since Unconstrained Delegetation is enabled on the compromised server, the victim also sends their TGT within the TGS. However, there is another way to compromise computers. 
 
@@ -48,8 +48,8 @@ Keep reading and your question will be answered ;)
 
 So far I have mentioned relay attacks, and specifically SMB relays. This kind of attack has been known for many years. If you want to learn more about SMB relay you can read the following posts:
 
-* [https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html]()
-* [https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/]()
+* [https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html](https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html)
+* [https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/](https://www.sans.org/blog/smb-relay-demystified-and-ntlmv2-pwnage-with-python/)
 
 The rest of this post is based on the reader's basic understanding of relay attacks so make sure you have read the above posts.
 
@@ -61,7 +61,7 @@ It looks like there is a way to do this! Actually this is possible for a few yea
 
 DivertTCPconn is based on hwfwbypass and both are written in C++. It is using the amazingly complicated WinDivert project written by Basil:
 
-* [https://github.com/basil00/Divert]()
+* [https://github.com/basil00/Divert](https://github.com/basil00/Divert)
 
 #### How does it work?
 
@@ -85,7 +85,7 @@ The most important thing that WinDivert allows us to do is to intercept traffic 
 
 On Windows, port 445 is always running by default. I won't go into detail about the process using port 445 because this is already analysed in the following post, so please go ahead and read it:
 
-* [https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/]()
+* [https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/](https://diablohorn.com/2018/08/25/remote-ntlm-relaying-through-meterpreter-on-windows-port-445/)
 
 As mentioned in the above post, it also contains another interesting idea. Using WinDivert to perform an SMB relay attack via Metasploit. You can upload a few DLLs and a driver file to the target host along with the divertTCPconn.exe and execute them. I found this attack to be awesome, but what I didn't like was that you had to upload multiple DLLs on the target host. 
 
@@ -95,7 +95,7 @@ So my goal was to do the same attack by dropping the minimum amount of files on 
 
 First of all, I wanted to make use of Cobalt Strike's `execute-assembly` function so I decided to write my code using the .NET framework. My initial thought would be to re-write divertTCPconn in C# and then everything would work. It turns out that this was very complicated. Fortunately, I found the following NuGet package by TechnikEmpire:
 
-* [https://github.com/TechnikEmpire/WinDivertSharp]()
+* [https://github.com/TechnikEmpire/WinDivertSharp](https://github.com/TechnikEmpire/WinDivertSharp)
 
 Using WinDivertSharp, I was able to write a tool called [SharpRelay](https://github.com/pkb1s/SharpRelay) to communicate with the WinDivert driver and perform any packet modification I wanted. The only requirement for this attack to work is to have a beacon with local administrator privileges or with the ability to load drivers. The attack using SharpRelay works as follows:
 
@@ -107,10 +107,10 @@ Using WinDivertSharp, I was able to write a tool called [SharpRelay](https://git
 * When a victim tries to access port 445 of the compromised host the NTLM authentication will be forwarded to our teamserver and relayed to another machine
 
 The code of SharpRelay can be found here:
-* [https://github.com/pkb1s/SharpRelay]()
+* [https://github.com/pkb1s/SharpRelay](https://github.com/pkb1s/SharpRelay)
 
 Also, a big part of the code I used for the packet interception was taken from this project by TechnikEmpire:
-* [https://github.com/TechnikEmpire/CitadelCore]()
+* [https://github.com/TechnikEmpire/CitadelCore](https://github.com/TechnikEmpire/CitadelCore)
 
 ### Show me a video or it didn't happen
 
