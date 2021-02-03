@@ -3,8 +3,6 @@ layout: single
 title: Relay Attacks via Cobalt Strike Beacons
 tags: [active-directory]
 classes: wide
-#header:
-#  teaser: /images/Welcome-to-my-first-post/icon.png
 ---
 
 ### Introduction
