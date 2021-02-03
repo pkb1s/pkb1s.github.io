@@ -105,7 +105,7 @@ Using WinDivertSharp, I was able to write a tool called SharpRelay to communicat
 * Run SharpRelay to modify the destination port of the incoming packets on port 445 and redirect them to another port (e.g. 8445)
 * From our beacon run the Cobalt Strike's `rportfwd` command to forward port 8445 of the compromised host to our teamserver's port 445.
 * Start a socks server to forward the relayed traffic back to the victim network
-* Run Impacket's ntlmrelayx with proxychains to do the SMB relay
+* Run Impacket's [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) with proxychains to do the SMB relay
 * When a victim tries to access port 445 of the compromised host the NTLM authentication will be forwarded to our teamserver and relayed to another machine
 
 The code of SharpRelay can be found here:
